@@ -12,5 +12,3 @@ declare namespace MapVGl {
     [x: string]: any;
   }
 }
-
-declare type mapvgl = MapVGl;
