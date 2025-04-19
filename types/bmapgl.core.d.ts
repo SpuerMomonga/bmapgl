@@ -470,8 +470,8 @@ declare namespace BMapGL {
      * 配置地图显示元素。该参数详细信息请参见 setDisplayOptions方法
      */
     displayOptions?: object;
-    // enableHighResolution?: boolean;
-    // enableMapClick?: boolean;
+    enableHighResolution?: boolean;
+    enableMapClick?: boolean;
   }
 
   interface Viewport {
