@@ -53,8 +53,10 @@ declare namespace BMapGL {
     constructor(options?: ParkingSpotOptions);
   }
 
+  type ReferenceType = 'BD09LL' | 'BD09MC' | 'EPSG3857' | 'GCJ02' | 'WGS84';
+
   interface GeoJSONParseOptions {
-    reference: 'BD09LL' | 'BD09MC' | 'EPSG3857' | 'GCJ02' | 'WGS84';
+    reference: ReferenceType;
   }
 
   /**
@@ -62,10 +64,127 @@ declare namespace BMapGL {
    */
   class GeoJSONParse {
     constructor(options?: GeoJSONParseOptions);
-    // readFeatureFromObject(geojson_feature, options);
+    readFeatureFromObject(geojson: GeoJSONFeature, options?: FeatureFromObjectOptions): any;
+    readFeaturesFromObject(geojson: GeoJSONFeatureCollection, options?: FeatureFromObjectOptions): any;
   }
 
-  class GeoJSONLayer {}
+  interface FeatureFromObjectOptions {
+    reference?: ReferenceType;
+    isPoints?: boolean;
+    markerStyle?: (properties: any) => MarkerOptions;
+    polylineStyle?: (properties: any) => PolylineOptions;
+    polygonStyle?: (properties: any) => PolygonOptions;
+  }
+
+  interface GeoJSONLayerOptions {
+    /**
+     * GeoJSON解构数据
+     */
+    dataSource?: any;
+    /**
+     * 来源数据的坐标系，可选择：BD09LL｜BD09MC｜EPSG3857｜GCJ02｜WGS84，默认是：BD09LL
+     */
+    reference?: ReferenceType;
+    /**
+     * 点类型数据样式，配置项详见BMapGL.Marker的MarkerOptions配置内容
+     * @param properties
+     * @returns
+     */
+    markerStyle?: (properties: any) => MarkerOptions;
+    /**
+     * 线类型数据样式，配置项详见BMapGL.Polyline的PolylineOptions配置内容
+     * @param properties
+     * @returns
+     */
+    polylineStyle?: (properties: any) => PolylineOptions;
+    /**
+     * 面类型数据样式，配置项详见BMapGL.Polygon的PolygonOptions配置内容
+     * @param properties
+     * @returns
+     */
+    polygonStyle?: (properties: any) => PolygonOptions;
+    /**
+     * 最小显示层级，默认3
+     */
+    minZoom?: number;
+    /**
+     * 最大显示层级，默认21
+     */
+    maxZoom?: number;
+    /**
+     * 显示层级，由于系统内部问题，GeoJSONLayer图层等级使用负数表达，负数越大层级越高，默认-99
+     */
+    level?: number;
+    /**
+     * 图层数据是否显示，默认true
+     */
+    visible?: boolean;
+  }
+
+  class GeoJSONLayer {
+    /**
+     * 构建GeoJSONLayer覆盖物组合图层类。layerName为图层名设置，每个覆盖物都将写入layerName属性；options详见下表
+     * @param layerName
+     * @param options
+     */
+    constructor(layerName: string, options: GeoJSONLayerOptions);
+    /**
+     * 设置图层显示的数据源
+     * @param geojson
+     */
+    setData(geojson: GeoJSONFeature | GeoJSONFeatureCollection): void;
+    /**
+     * 获取覆盖物对象集合
+     */
+    getData(): any;
+    /**
+     * 清空地图上的覆盖物数据，以及覆盖物对象集合
+     */
+    clearData(): void;
+    /**
+     * 样式重置到图层初始化状态
+     */
+    resetStyle(): void;
+    /**
+     * 通过事件获取当前包含当前点的覆盖物集合
+     * @param e
+     */
+    pickOverlays(e: Event): void;
+    /**
+     * 设置显示层级
+     * @param z
+     */
+    setLevel(z: number): void;
+    /**
+     * 获取显示层级
+     */
+    getLevel(): number;
+    /**
+     * 设置是否显示
+     */
+    setVisible(v: boolean): void;
+    /**
+     * 获取显示状态
+     */
+    getVisible(): boolean;
+    /**
+     * 清空地图上的覆盖物数据，且清空覆盖物对象集合，以及关联的map对象
+     */
+    destroy(): void;
+    addEventListener(type: string, callback: (e: any) => void): void;
+    removeEventListener(type: string, callback: (e: any) => void): void;
+  }
+
+  interface NormalLayerOptions {
+    /**
+     * 是否显示，默认true
+     */
+    visible?: boolean;
+  }
+
+  class NormalLayer extends TileLayer {
+    constructor(options?: NormalLayerOptions);
+  }
 
   class TrafficLayer extends TileLayer {
     constructor(opts?: TrafficLayerOptions);

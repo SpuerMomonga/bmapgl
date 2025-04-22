@@ -389,6 +389,10 @@ declare namespace BMapGL {
      * @param layer
      */
     addParkingSpot(layer: ParkingSpot): void;
+    addGeoJSONLayer(layer: GeoJSONLayer): void;
+    removeGeoJSONLayer(layer: GeoJSONLayer): void;
+    addTileLayer(tileLayer: TileLayer): void;
+    removeTileLayer(tilelayer: TileLayer): void;
     /**
      * 销毁地图，当使用 WebGL 渲染地图时，如果确认不再使用该地图实例，则需要调用本方法销毁 WebGL 上下文，否则频繁创建新地图实例会导致浏览器报：too many WebGL context 的警告
      */

@@ -1,4 +1,4 @@
-declare namespace MapVGL {
+declare module 'mapvgl' {
   interface LayerOptions extends Pick {
     /**
      * 地图循环渲染时图层会截断，所以展示全球范围的点、线需要图层同步底图循环时，该参数设为true
@@ -56,15 +56,15 @@ declare namespace MapVGL {
     /**
      * 地图对象
      */
-    map: BMapGL.Map;
+    map?: BMapGL.Map;
     /**
      * 地图类型，默认为3D百度地图
      */
-    mapType: 'bmap' | 'blank' | 'cesium';
+    mapType?: 'bmap' | 'blank' | 'cesium';
     /**
      * 图像后处理效果对象数组
      */
-    effects: Effect[];
+    effects?: Effect[];
   }
 
   /**

@@ -1,3 +1,5 @@
+/// <reference path="./bmapgl.base.d.ts" />
+
 declare namespace BMapGL {
   /**
    * 此类表示地图视角动画的配置
