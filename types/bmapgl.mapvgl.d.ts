@@ -11,11 +11,11 @@ declare module 'mapvgl' {
     /**
      * 颜色叠加模式，详情: https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/blendFunc
      */
-    blend: string | string[];
+    blend?: string | string[];
     /**
      * 数据
      */
-    data: GeoJSON[];
+    data?: GeoJSON[];
   }
 
   /**
@@ -1151,7 +1151,7 @@ declare module 'mapvgl' {
   interface GeoJSON {
     geometry: {
       type: 'Point' | 'LineString' | 'Polygon';
-      coordinates: number[][] | number[][][];
+      coordinates: number[] | number[][] | number[][][];
     };
     properties?: {
       [x: string]: any;

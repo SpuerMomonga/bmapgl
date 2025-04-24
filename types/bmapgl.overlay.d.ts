@@ -54,6 +54,9 @@ declare namespace BMapGL {
      */
     markerPane?: HTMLElement;
     markerShadow?: HTMLElement;
+    /**
+     * @deprecated 已弃用
+     */
     mapPane?: HTMLElement;
   }
 
@@ -274,12 +277,12 @@ declare namespace BMapGL {
     /**
      * 创建一个矢量图标实例。path为svg中的path字符串或者已定义的符号常量,opts为矢量图标的样式
      */
-    constructor(path: string | SymboShapeType, opts: SVGSymbolOptions);
+    constructor(path: string | SymbolShapeType, opts: SVGSymbolOptions);
     /**
      * 设置矢量图标的路径
      * @param path
      */
-    setPath(path: string | SymbolShape): void;
+    setPath(path: string | SymbolShapeType): void;
     /**
      * 设置矢量图标的定位点,该定位点的位置以图标自身为基准
      * @param anchor
@@ -325,7 +328,7 @@ declare namespace BMapGL {
   /**
    * 此枚举类型表示矢量图标类预设的图标样式
    */
-  enum SymboShapeType {
+  enum SymbolShapeType {
     /**
      * 圆形，默认半径为1px
      */

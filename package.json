@@ -1,7 +1,7 @@
 {
   "name": "@spuermomonga/bmapgl",
   "type": "module",
-  "version": "0.0.11",
+  "version": "0.0.14",
   "description": "TypeScript definitions for new bmapgl-browser. 百度地图JSAPI WebGL v1.0 TypeScript类型定义",
   "homepage": "https://github.com/SpuerMomonga/bmapgl",
   "types": "./types/index.d.ts",
